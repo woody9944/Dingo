@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Dingo": {
+      "commandName": "Project",
+      "commandLineArgs": "hands"
+    }
+  }
+}
