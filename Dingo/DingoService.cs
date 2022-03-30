@@ -82,7 +82,7 @@ namespace Dingo
             for (int i = 0; i < guesses.Count; i++)
             {
                 outputStringBuilder.Append(GenerateLine(guesses[i]));
-                outputStringBuilder.Append(guesses[i].ToString() + "\n");
+                outputStringBuilder.Append(" " + guesses[i].ToString() + "\n");
             }
 
             return outputStringBuilder.ToString();

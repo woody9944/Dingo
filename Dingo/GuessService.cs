@@ -78,20 +78,20 @@ namespace Dingo
                 }
             }
 
-            HashSet<String> happyWords = new HashSet<string>();
+            HashSet<String> WordsWithKnownLetters = new HashSet<string>();
             foreach (string word in words)
             {
                 for(int i=0; i<5; i++)
                 {
                     if (knownPlacements[i].Equals(word[i])){
-                        happyWords.Add(word);
+                        WordsWithKnownLetters.Add(word);
                     }
                 }
             }
 
             for(int i=0; i<words.Count; i++)
             {
-                if (!happyWords.Contains(words[i]))
+                if (!WordsWithKnownLetters.Contains(words[i]))
                 {
                     wordsToRemove.Add(words[i]);
                 }

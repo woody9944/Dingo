@@ -2,7 +2,7 @@
   "profiles": {
     "Dingo": {
       "commandName": "Project",
-      "commandLineArgs": "crisp"
+      "commandLineArgs": "sandy"
     }
   }
 }
