@@ -24,12 +24,11 @@ namespace Dingo
             this.guesses = guesses;
             this.discountedLetters = new List<char>();
             this.knownLetters = new HashSet<char>();
-            this.knownPlacements = new char[5];
+            this.knownPlacements = new char[5] {'#', '#', '#', '#', '#'};
         }
 
         public string Next(State[] results)
         {
-            string nextWord;
 
             // data collection
             for (int i = 0; i < results.Length; i++)
@@ -55,7 +54,7 @@ namespace Dingo
             {
                 for(int j = 0; j < discountedLetters.Count; j++)
                 {
-                    if (words[i].Contains(discountedLetters[j]))
+                    if (words[i].Contains<char>(discountedLetters[j]))
                     {
                         wordsToRemove.Add(words[i]);
                     }
@@ -64,43 +63,27 @@ namespace Dingo
             
             foreach(string word in words)
             {
-                Boolean remove = true;
                 foreach (char c in knownLetters)
                 {
-                    if (word.Contains(c))
+                    if (knownLetters.Count > 0 && !word.Contains<char>(c))
                     {
-                        remove = false;
+                        wordsToRemove.Add(word);
                     }
-                }
-                if (remove)
-                {
-                    wordsToRemove.Add(word);
                 }
             }
 
-            HashSet<String> WordsWithKnownLetters = new HashSet<string>();
-            foreach (string word in words)
+            foreach(string word in words)
             {
                 for(int i=0; i<5; i++)
                 {
-                    if (knownPlacements[i].Equals(word[i])){
-                        WordsWithKnownLetters.Add(word);
+                    if ((!knownPlacements[i].Equals('#')) && (knownPlacements[i] != word[i]))
+                    {
+                        wordsToRemove.Add(word);
                     }
                 }
             }
 
-            for(int i=0; i<words.Count; i++)
-            {
-                if (!WordsWithKnownLetters.Contains(words[i]))
-                {
-                    wordsToRemove.Add(words[i]);
-                }
-                if (wordsToRemove.Contains(words[i]))
-                {
-                    words.Remove(words[i]);
-                }
-                
-            }
+            words.RemoveAll(word => wordsToRemove.Contains(word));
 
             return words[r.Next(words.Count)];
         }
